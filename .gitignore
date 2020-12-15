@@ -1,6 +1,6 @@
 .cache/
 .conda/
 .vscode/extensions
-[A-Z0-9]*/
+/[A-Z0-9]*/**
 !AppData/Local/Microsoft/Windows/Fonts
 ntuser*
