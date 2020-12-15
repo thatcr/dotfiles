@@ -1,0 +1,6 @@
+# don't touch anaconda.com
+default_channels:
+  - https://conda.anaconda.org/conda-forge
+
+# default from conda-forge is 1200 seconds
+local_repodata_ttl: 1
