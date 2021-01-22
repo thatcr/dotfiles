@@ -4,6 +4,14 @@
 .docker/
 .config/gh
 .config/wslu
+.config/configstore
+.ssh/
+.jupyter/
+.ipython/
+.local/
+.npm/
+
+projects/
 .aws
 .azure
 .osh-*
@@ -16,3 +24,6 @@
 ntuser*
 .*_history
 .git-credentials
+.netrc
+.lesshst
+.sdirs

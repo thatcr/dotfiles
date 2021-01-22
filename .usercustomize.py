@@ -5,8 +5,10 @@ import env_config
 import rich
 import rich.pretty
 import rich.logging
+import rich.traceback
 
 rich.pretty.install()
+rich.traceback.install()
 
 # use rich's nice
 FORMAT = "%(message)s"
@@ -19,7 +21,3 @@ logging.basicConfig(
 
 cfg = env_config.Config()
 cfg.apply_log_levels()
-
-# for k, v in sorted(os.environ.items()):
-
-# 1/0

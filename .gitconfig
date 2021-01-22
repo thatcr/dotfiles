@@ -3,3 +3,13 @@
 	email = thatcr@gmail.com
 [core]
 	editor = code --wait
+
+[credential]
+	helper = store
+
+[push]
+	default = matching
+
+[alias]
+	pv = pull --verbose
+	psv = push --verbose 
