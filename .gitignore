@@ -11,7 +11,7 @@
 .local/
 .npm/
 .pylint.d/
-
+.cookiecutter_replay/
 projects/
 .aws
 .azure
