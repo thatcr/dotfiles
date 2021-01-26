@@ -12,7 +12,7 @@ rich.pretty.install()
 rich.traceback.install(show_locals=True)
 
 # use rich's nice
-FORMAT = %(message)s"
+FORMAT = "%(message)s"
 logging.basicConfig(
     level=logging.NOTSET,
     format=FORMAT,
