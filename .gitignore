@@ -28,3 +28,15 @@ ntuser*
 .netrc
 .lesshst
 .sdirs
+Downloads
+.rustup/
+.systemd-env/
+.wget-hsts/
+.cargo/
+.cookiecutters/
+.dotnet/
+.oh-my-bash/
+third/
+.pyenv/
+.wget-hsts
+.pythonhist
