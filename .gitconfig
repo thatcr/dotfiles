@@ -13,3 +13,6 @@
 [alias]
 	pv = pull --verbose
 	psv = push --verbose 
+
+[credential "https://github.com"]
+    helper = !gh auth git-credential
