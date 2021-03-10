@@ -5,10 +5,15 @@
 .config/gh
 .config/wslu
 .config/configstore
+.config/gcloud
+.viminfo
+.wget-hsts
+snap/
 .ssh/
 .jupyter/
 .ipython/
 .local/
+.boto
 .npm/
 .pylint.d/
 .cookiecutter_replay/
