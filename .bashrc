@@ -1,5 +1,9 @@
 export PATH=~/.local/bin:~/.pyenv/bin:${PATH}
 
+eval "$(pyenv init -)"
+
+source ~/.env
+
 # Path to your oh-my-bash installation.
 export OSH=/home/thatcr/.oh-my-bash
 
@@ -101,4 +105,3 @@ source $OSH/oh-my-bash.sh
 # Example aliases
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
-source "$HOME/.cargo/env"

@@ -44,3 +44,6 @@ Downloads
 third/
 .pyenv/
 .pythonhist
+checkpoint_cache
+checkpoint_signature
+__pycache__/
