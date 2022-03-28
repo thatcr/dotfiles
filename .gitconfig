@@ -1,6 +1,6 @@
 [user]
 	name = Rob Thatcher
-	email = thatcr@gmail.com
+
 [core]
 	editor = code --wait
 
@@ -8,11 +8,34 @@
 	helper = store
 
 [push]
-	default = matching
-
-[alias]
-	pv = pull --verbose
-	psv = push --verbose
+	default = current
 
 [credential "https://github.com"]
     helper = !gh auth git-credential
+
+[push]
+	default = current
+
+[core]
+	editor = code --wait
+
+[diff]
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[merge]
+	tool = vscode
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+
+[alias]
+	co = checkout
+	ci = commit
+	rbom = rebase origin/master --strategy-option theirs
+	nb = "!git checkout -b"
+	mr = "!git fetch origin master; git checkout -B master origin/master"
+	wn = diff --name-only origin/master
+	bo = "checkout origin/master"

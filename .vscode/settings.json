@@ -3,5 +3,10 @@
   "python.linting.flake8Enabled": true,
   "python.linting.enabled": true,
   "python.pythonPath": ".pyenv/versions/3.9.1/bin/python",
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#1E3224",
+    "titleBar.activeBackground": "#2A4632",
+    "titleBar.activeForeground": "#F8FBF9"
+  }
 }
