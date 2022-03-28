@@ -11,6 +11,19 @@ $Env:HOME = "$Env:USERPROFILE"
 $Env:PIP_NO_PYTHON_VERSION_WARNING = "1"
 $Env:PIP_DISABLE_PIP_VERSION_CHECK = "1"
 
+function Install-VS2015-Environment {
+    [CmdletBinding()] param()
+    Push-Location "${Env:PROGRAMFILES(x86)}\Microsoft Visual Studio 14.0\VC"
+
+    cmd /c "vcvarsall.bat amd64 & SET" | ForEach-Object {
+        if ($_ -match "=") {
+            $v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
+        }
+    }
+    Pop-Location
+    Write-Host "`nVisual Studio 2015 Command Prompt variables set." -ForegroundColor Yellow
+}
+
 function Install-My-Stuff {
     [CmdletBinding()]param()
 
