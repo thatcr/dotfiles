@@ -11,6 +11,17 @@ $Env:HOME = "$Env:USERPROFILE"
 $Env:PIP_NO_PYTHON_VERSION_WARNING = "1"
 $Env:PIP_DISABLE_PIP_VERSION_CHECK = "1"
 
+# move anything linuxy to read from this repo
+$Env:XDG_CONFIG_HOME = "$PSScriptRoot/.config"
+
+# configure starship from dotfiles
+$Env:STARSHIP_CONFIG = "$PSScriptRoot/.config/starship.toml"
+
+function whois {
+    [CmdletBinding()] param($userid)
+    Get-AdUser -Identity $userid
+}
+
 function Install-VS2015-Environment {
     [CmdletBinding()] param()
     Push-Location "${Env:PROGRAMFILES(x86)}\Microsoft Visual Studio 14.0\VC"
@@ -52,6 +63,15 @@ function which {
     Get-Command -All -ShowCommandInfo $command
 }
 
+# write a pwsh to strip anything witha a conda-meta from the PATH
+
+
+
+
+
+# figure out a conda ont he PATH, install powershell from there.
+# (& "$Env:LOCALAPPDATA\bp-conda\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
 
 Invoke-Expression (&starship init powershell)
 Import-Module posh-git
+
