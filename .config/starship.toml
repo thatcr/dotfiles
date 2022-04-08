@@ -4,7 +4,12 @@ add_newline = true
 # format = "$status$directory$git_branch$conda$time$username$hostname\n$status$character"
 
 [python]
-disabled = true
+disabled = false
 
 [git_status]
 disabled = true
+
+
+[status]
+disabled = false
+format="[$symbol $status]($style) "

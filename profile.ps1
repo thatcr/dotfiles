@@ -17,10 +17,8 @@ $Env:XDG_CONFIG_HOME = "$PSScriptRoot/.config"
 # configure starship from dotfiles
 $Env:STARSHIP_CONFIG = "$PSScriptRoot/.config/starship.toml"
 
-function whois {
-    [CmdletBinding()] param($userid)
-    Get-AdUser -Identity $userid
-}
+# this causes pain
+$Env:PYTHONNOUSERSITE = "1"
 
 function Install-VS2015-Environment {
     [CmdletBinding()] param()
@@ -35,6 +33,24 @@ function Install-VS2015-Environment {
     Write-Host "`nVisual Studio 2015 Command Prompt variables set." -ForegroundColor Yellow
 }
 
+$ScoopPackages = (
+    "7zip", "delta", "depends", "git", "greenshot", "Hack-NF", "Hack-NF-Mono",
+    "pwsh", "pycharm", "ripgrep", "starship", "sudo", "sysinternals", "tokei", "windows-terminal",
+    "azure-cli", "lf"
+)
+
+# Get-Process-From-Prefix | Stop-Process -Confirm
+# NOTE no process owner from here?
+function Get-Process-From-Prefix {
+    [CmdletBinding()]param(
+        [string]$Prefix = $Env:CONDA_PREFIX
+    )
+    Get-Process | Where-Object { ($null -ne $_.Path) -and $_.Path.StartsWith($Prefix) }
+
+    # use -IncludeUserName if admin
+}
+
+
 function Install-My-Stuff {
     [CmdletBinding()]param()
 
@@ -42,9 +58,26 @@ function Install-My-Stuff {
         iwr -useb get.scoop.sh | iex
         scoop bucket add extras
         scoop bucket add nerd-fonts
+        scoop install sudo
     }
 
-    scoop install ripgrep
+    sudo scoop update sudo
+
+    foreach ($Package in $ScoopPackages) {
+        scoop install $Package
+    }
+
+    sudo scoop update --all
+}
+
+
+
+function rmrf {
+    [CmdletBinding()]
+    param(
+        [string]$Path
+    )
+    Remove-Item -Force -Recurse -Path $Path
 }
 
 
@@ -60,17 +93,14 @@ function setx {
 function which {
     [CmdletBinding()]
     param([string]$command)
-    Get-Command -All -ShowCommandInfo $command
+    Get-Command -All -ShowCommandInfo $command | Format-Table -Property CommandType, Definition -AutoSize
 }
 
-# write a pwsh to strip anything witha a conda-meta from the PATH
+function whois {
+    [CmdletBinding()] param($userid)
+    Get-AdUser -Identity $userid
+}
 
-
-
-
-
-# figure out a conda ont he PATH, install powershell from there.
-# (& "$Env:LOCALAPPDATA\bp-conda\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
 
 Invoke-Expression (&starship init powershell)
 Import-Module posh-git
