@@ -45,7 +45,7 @@ function Get-Process-From-Prefix {
     [CmdletBinding()]param(
         [string]$Prefix = $Env:CONDA_PREFIX
     )
-    Get-Process | Where-Object { ($null -ne $_.Path) -and $_.Path.StartsWith($Prefix) }
+    Get-Process | Where-Object { ($null -ne $_.Path) -and $_.Path.StartsWith($Prefix) } | Format-Table -Property Id,CommandLine
 
     # use -IncludeUserName if admin
 }

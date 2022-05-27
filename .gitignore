@@ -6,6 +6,7 @@
 .config/wslu
 .config/configstore
 .config/gcloud
+.config/scoop
 .viminfo
 .wget-hsts
 snap/

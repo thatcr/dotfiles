@@ -11,14 +11,16 @@
 	prune = true
 
 [push]
-	default = current
+	default = simple
 
 [credential "https://github.com"]
     helper = !gh auth git-credential
 
 # TODO how to configure a default upstream on first push?
 #      have workon make it and push it?
-
+[branch]
+	autoSetupMerge = true
+	autoSetupRebase = always
 
 [core]
 	editor = code --wait
@@ -38,6 +40,9 @@
 	side-by-side = true
 
 
+# TODO work workin - need to configure the branch to have .rebase = origin/master, . .branch = $1
+#      can this be a default?
+#      How does command line git manage this, but not vscode?
 [alias]
 	rbom = "!git fetch origin master && git rebase origin/master --strategy-option theirs"
 	rbc = "rebase --continue"
@@ -45,7 +50,7 @@
 	wn = "diff --name-only origin/master"
 	bv = "!git fetch --prune; git branch --verbose --no-abbrev"
 	bd = "branch --delete --force"
-	wo = "!git fetch origin master && (git branch origin/master -b $1 || (git checkout $1 && git rebase origin/master --strategy-option theirs)); echo Now working on "
+	wo = "!git fetch origin master && ((git branch $1 origin/master && git branch $1 --set-upstream-to origin/$1) || (git checkout $1 && git rebase origin/master --strategy-option theirs)) && echo Now working on "
 	br = "branch -m"
 	bc = "branch -c"
 	dom = "!git fetch origin master; git diff origin/master"
@@ -56,3 +61,6 @@
 	ca = "commit --all"
 	caf = "commit --all --no-verify -m"
 	fu = "commit --fixup"
+
+	# TODO write a better script to query any open PR first?
+	adopr = "!az repos pr create --open"
