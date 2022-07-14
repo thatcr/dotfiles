@@ -45,7 +45,7 @@ function Get-Process-From-Prefix {
     [CmdletBinding()]param(
         [string]$Prefix = $Env:CONDA_PREFIX
     )
-    Get-Process | Where-Object { ($null -ne $_.Path) -and $_.Path.StartsWith($Prefix) } | Format-Table -Property Id,CommandLine
+    Get-Process | Where-Object { ($null -ne $_.Path) -and $_.Path.StartsWith($Prefix) } | Format-Table -Property Id, CommandLine
 
     # use -IncludeUserName if admin
 }
@@ -98,10 +98,10 @@ function which {
 
 function whois {
     [CmdletBinding()] param($userid)
-    Get-AdUser -Identity $userid
+    Get-AdUser -Identity $userid -Properties SamAccountName, DisplayName, extensionAttribute1, extensionAttribute2
 }
 
 
-Invoke-Expression (&starship init powershell)
+Invoke-Expression (& 'C:\Program Files\starship\bin\starship.exe' init powershell --print-full-init | Out-String)
 Import-Module posh-git
 

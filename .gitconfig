@@ -12,6 +12,7 @@
 
 [push]
 	default = simple
+	autosetupremote = true
 
 [credential "https://github.com"]
     helper = !gh auth git-credential
@@ -48,7 +49,7 @@
 	rbc = "rebase --continue"
 	mr = "!git fetch origin master && git checkout -B master origin/master"
 	wn = "diff --name-only origin/master"
-	bv = "!git fetch --prune; git branch --verbose --no-abbrev"
+	bv = "!git fetch --prune; git branch --sort=committerdate"
 	bd = "branch --delete --force"
 	wo = "!git fetch origin master && ((git branch $1 origin/master && git branch $1 --set-upstream-to origin/$1) || (git checkout $1 && git rebase origin/master --strategy-option theirs)) && echo Now working on "
 	br = "branch -m"
