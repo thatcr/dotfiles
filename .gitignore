@@ -23,6 +23,7 @@ projects/
 .azure
 .osh-*
 .motd_shown
+.k5login
 .sudo_as_admin_successful
 .vscode/extensions
 .vscode-server/*
@@ -49,3 +50,10 @@ checkpoint_cache
 checkpoint_signature
 __pycache__/
 .config/vscode-dev-containers
+workspace/
+*.lic
+*.sig
+scratch/
+miniforge3/
+.vscode-server/
+.cfg/

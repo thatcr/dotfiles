@@ -1,1 +1,1 @@
-eval "$(starship init bash)"
+exec pwsh

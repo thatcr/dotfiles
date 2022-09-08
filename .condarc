@@ -5,7 +5,7 @@ default_channels:
 # default from conda-forge is 1200 seconds
 local_repodata_ttl: 1
 
-# let oh-my-bash do this
+# let the shell do this instead
 changeps1: False
 
 # stack so we can see base tools
