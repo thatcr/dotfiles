@@ -1,4 +1,14 @@
 
+If (Test-Path Env:CONDA) {
+    $CondaShell = "$PSScriptRoot\.conda.ps1"
+
+    If (!(Test-Path $CondaShell)) {
+        Write-Host "Generaeting $CondaShell..."
+        (& "$Env:CONDA\Scripts\conda.exe" "shell.powershell" "hook") | Out-File "$CondaShell"
+    }
+    . "$CondaShell"
+}
+
 $Env:PY_COLORS = "1"
 # controls poetry's colours, but breaks nox-poetry
 #$Env:ANSICON = "1"
@@ -104,4 +114,10 @@ function whois {
 
 Invoke-Expression (& 'C:\Program Files\starship\bin\starship.exe' init powershell --print-full-init | Out-String)
 Import-Module posh-git
+
+
+function xl {
+    & "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE"
+}
+
 
