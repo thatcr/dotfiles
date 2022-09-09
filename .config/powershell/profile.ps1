@@ -77,7 +77,7 @@ function rmrf {
     Remove-Item -Force -Recurse -Path $Path
 }
 
-function gitcfg {
+function cfg {
     git --git-dir $Env:HOME/.cfg --work-tree=$Env:HOME $Args
 }
 
@@ -107,17 +107,5 @@ function whois {
 Invoke-Expression (& starship init powershell --print-full-init | Out-String)
 Import-Module posh-git
 
-# (& conda "shell.powershell" "hook") | Out-String | Invoke-Expression
-
-$Env:CONDA_EXE = "C:\Users\0066tm\AppData\Local\bp-conda\Scripts\conda.exe"
-$Env:_CE_M = ""
-$Env:_CE_CONDA = ""
-$Env:_CONDA_ROOT = "C:\Users\0066tm\AppData\Local\bp-conda"
-$Env:_CONDA_EXE = "C:\Users\0066tm\AppData\Local\bp-conda\Scripts\conda.exe"
-$CondaModuleArgs = @{ChangePs1 = $False}
-Import-Module "$Env:_CONDA_ROOT\shell\condabin\Conda.psm1" -ArgumentList $CondaModuleArgs
-
-conda activate base
-
-Remove-Variable CondaModuleArgs
-
+# Initialise powershell with conda settings
+(& "$Env:CONDA_EXE" "shell.powershell" "hook") | Out-String | Invoke-Expression

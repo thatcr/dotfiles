@@ -57,6 +57,7 @@ workspace/
 *.sig
 scratch/
 miniforge3/
+scoop/
 .vscode-server/
 .cfg/
 
