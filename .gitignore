@@ -2,14 +2,8 @@
 .conda/
 .kube/
 .docker/
-.config/gh
-.config/wslu
-.config/configstore
-.config/gcloud
-.config/scoop
 .viminfo
 .wget-hsts
-snap/
 .ssh/
 .jupyter/
 .ipython/
@@ -18,24 +12,32 @@ snap/
 .npm/
 .pylint.d/
 .cookiecutter_replay/
-projects/
 .aws
-.azure
+.azure-devops/
 .osh-*
 .motd_shown
 .k5login
 .sudo_as_admin_successful
-.vscode/extensions
-.vscode-server/*
-/[A-Z0-9]*/**
-!AppData/Local/Microsoft/Windows/Fonts
-ntuser*
+.vscode-server/
+.ipynb_checkpoints/
+
+.*/
+!.config/
+!.config/**/
+
+!.github/**
+
+!.vscode/
+
+# windows folders
+[A-Z]*/
+
 .*_history
 .git-credentials
 .netrc
 .lesshst
 .sdirs
-Downloads
+
 .rustup/
 .systemd-env/
 .wget-hsts/
@@ -57,3 +59,16 @@ scratch/
 miniforge3/
 .vscode-server/
 .cfg/
+
+# Windows Stuff
+NTUSER*
+ntuser*
+OneDrive*/
+BP/
+3D Objects/
+AppData/
+Application Data/
+Contacts/
+Cookies/
+Documents/
+

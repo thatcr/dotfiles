@@ -17,15 +17,6 @@ If ($IsWindows) {
     $Env:HOME = "$Env:USERPROFILE"
 }
 
-# move anything linuxy to read from this repo
-# $Env:XDG_CONFIG_HOME = "$PSScriptRoot/.config"
-
-# configure starship from dotfiles
-# $Env:STARSHIP_CONFIG = "$PSScriptRoot/.config/starship.toml"
-
-# this causes pain
-
-
 function Install-VS2015-Environment {
     [CmdletBinding()] param()
     Push-Location "${Env:PROGRAMFILES(x86)}\Microsoft Visual Studio 14.0\VC"
@@ -39,6 +30,7 @@ function Install-VS2015-Environment {
     Write-Host "`nVisual Studio 2015 Command Prompt variables set." -ForegroundColor Yellow
 }
 
+# TODO use winget instead?
 $ScoopPackages = (
     "7zip", "delta", "depends", "git", "greenshot", "Hack-NF", "Hack-NF-Mono",
     "pwsh", "pycharm", "ripgrep", "starship", "sudo", "sysinternals", "tokei", "windows-terminal",
@@ -56,9 +48,10 @@ function Get-Process-From-Prefix {
     # use -IncludeUserName if admin
 }
 
-
 function Install-My-Stuff {
     [CmdletBinding()]param()
+
+    Install-Module posh-git -Scope CurrentUser
 
     Get-Command scoop || {
         iwr -useb get.scoop.sh | iex
@@ -76,8 +69,6 @@ function Install-My-Stuff {
     sudo scoop update --all
 }
 
-
-
 function rmrf {
     [CmdletBinding()]
     param(
@@ -89,7 +80,6 @@ function rmrf {
 function gitcfg {
     git --git-dir $Env:HOME/.cfg --work-tree=$Env:HOME $Args
 }
-
 
 function setx {
     [CmdletBinding()]
@@ -115,6 +105,19 @@ function whois {
 # C:\Program Files\starship\bin\starship.exe
 
 Invoke-Expression (& starship init powershell --print-full-init | Out-String)
-# Install-Module posh-git -Scope CurrentUser -Force
 Import-Module posh-git
+
+# (& conda "shell.powershell" "hook") | Out-String | Invoke-Expression
+
+$Env:CONDA_EXE = "C:\Users\0066tm\AppData\Local\bp-conda\Scripts\conda.exe"
+$Env:_CE_M = ""
+$Env:_CE_CONDA = ""
+$Env:_CONDA_ROOT = "C:\Users\0066tm\AppData\Local\bp-conda"
+$Env:_CONDA_EXE = "C:\Users\0066tm\AppData\Local\bp-conda\Scripts\conda.exe"
+$CondaModuleArgs = @{ChangePs1 = $False}
+Import-Module "$Env:_CONDA_ROOT\shell\condabin\Conda.psm1" -ArgumentList $CondaModuleArgs
+
+conda activate base
+
+Remove-Variable CondaModuleArgs
 

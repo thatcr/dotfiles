@@ -1,5 +1,6 @@
 [user]
 	name = Rob Thatcher
+	email = rob.thatcher@bp.com
 
 [core]
 	editor = code --wait
