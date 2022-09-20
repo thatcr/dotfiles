@@ -1,0 +1,40 @@
+mode = "local"
+project = ""
+shell = ""
+
+[dirs]
+project = []
+python = "isolated"
+data = "/workspace/.local/share/hatch"
+cache = "/workspace/.cache/hatch"
+
+[dirs.env]
+
+[projects]
+
+[publish.index]
+repo = "main"
+
+[template]
+name = "Rob Thatcher"
+email = "rob.thatcher@bp.com"
+
+[template.licenses]
+headers = true
+default = [
+    "MIT",
+]
+
+[template.plugins.default]
+tests = true
+ci = false
+src-layout = false
+
+[terminal.styles]
+info = "bold"
+success = "bold cyan"
+error = "bold red"
+warning = "bold yellow"
+waiting = "bold magenta"
+debug = "bold"
+spinner = "simpleDotsScrolling"

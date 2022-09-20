@@ -52,7 +52,7 @@ checkpoint_cache
 checkpoint_signature
 __pycache__/
 .config/vscode-dev-containers
-workspace/
+/workspace
 *.lic
 *.sig
 scratch/
@@ -72,4 +72,3 @@ Application Data/
 Contacts/
 Cookies/
 Documents/
-

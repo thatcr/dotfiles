@@ -15,6 +15,9 @@
 	default = simple
 	autosetupremote = true
 
+[credential]
+	helper = store
+
 [credential "https://github.com"]
     helper = !gh auth git-credential
 
@@ -26,10 +29,10 @@
 
 [core]
 	editor = code --wait
-	pager = delta
+#	pager = delta
 
-[interactive]
-	diffFilter = delta --color-only
+# [interactive]
+# 	diffFilter = delta --color-only
 
 [merge]
 	conflictstyle = diff3
