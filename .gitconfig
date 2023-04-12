@@ -3,7 +3,10 @@
 	email = rob.thatcher@bp.com
 
 [core]
-	editor = code --wait
+
+[pager]
+	diff = less -FX
+	branch = ""
 
 [pull]
 	rebase = true
@@ -29,7 +32,7 @@
 
 [core]
 	editor = code --wait
-#	pager = delta
+	pager = less -FX
 
 # [interactive]
 # 	diffFilter = delta --color-only
@@ -53,7 +56,7 @@
 	rbc = "rebase --continue"
 	mr = "!git fetch origin master && git checkout -B master origin/master"
 	wn = "diff --name-only origin/master"
-	bv = "!git fetch --prune; git branch --sort=committerdate"
+	br = "branch --sort=committerdate"
 	bd = "branch --delete --force"
 	wo = "!git fetch origin master && ((git branch $1 origin/master && git branch $1 --set-upstream-to origin/$1) || (git checkout $1 && git rebase origin/master --strategy-option theirs)) && echo Now working on "
 	br = "branch -m"
@@ -61,11 +64,19 @@
 	dom = "!git fetch origin master; git diff origin/master"
 	dunk = "!git diff origin/master | dunk"
 	rhh = "reset --hard HEAD"
-	rn = "branch -m"
-	c = "!git commit -m '$1'; echo"
-	ca = "commit --all"
-	caf = "commit --all --no-verify -m"
-	fu = "commit --fixup"
+	rn = "branch --move"
+	cq = "commit --all --no-verify -m"
+	fu = "commit --all --no-verify --amend"
+	pr = "!git fetch origin pull/$1/merge:pull/$1 && git checkout pull/$1; az repos pr show --id $1 -o json --query title; echo Checked out pull request"
 
 	# TODO write a better script to query any open PR first?
 	adopr = "!az repos pr create --open"
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[http]
+	sslBackend = schannel
+[gui]
+	recentrepo = C:/workspace/pyistqa
