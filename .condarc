@@ -1,14 +1,16 @@
 # don't touch anaconda.com
-default_channels:
-  - https://conda.anaconda.org/conda-forge
-
 # default from conda-forge is 1200 seconds
 local_repodata_ttl: 1
 
 # let the shell do this instead
-changeps1: False
+changeps1: false
 
 # stack so we can see base tools
 auto_stack: 1
 
-ssl_verify: /etc/ssl/certs/ca-bundle.crt
+#envs_dirs:
+#  - ${LOCALAPPDATA}\conda\envs
+# - ${LOCALAPPDATA}
+#solver: libmamba
+
+channel_alias: https://dml.bpweb.bp.com/artifactory/api/conda

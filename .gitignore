@@ -32,12 +32,14 @@
 # windows folders
 [A-Z]*/
 
+.R*
 .*_history
 .git-credentials
 .netrc
 .lesshst
+_lesshst
 .sdirs
-
+.pyistqa*
 .rustup/
 .systemd-env/
 .wget-hsts/

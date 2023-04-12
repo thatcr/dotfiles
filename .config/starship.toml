@@ -12,4 +12,4 @@ disabled = true
 
 [status]
 disabled = false
-format="[$symbol $status]($style) "
+format = "[$symbol $status]($style) "

@@ -1,14 +1,6 @@
 
-
-# controls poetry's colours, but breaks nox-poetry
-#$Env:ANSICON = "1"
-
-$Env:PYTHONNOUSERSITE = "1"
-
-$Env:PRE_COMMIT_COLOR = "always"
-
 $Env:PY_COLORS = "1"
-$Env:PYTEST_ADDOPTS = "--tb short"
+# $Env:PYTEST_ADDOPTS = "--tb short --lf --ff --maxfail 1"
 
 $Env:PIP_NO_PYTHON_VERSION_WARNING = "1"
 $Env:PIP_DISABLE_PIP_VERSION_CHECK = "1"
@@ -27,14 +19,14 @@ function Install-VS2015-Environment {
         }
     }
     Pop-Location
-    Write-Host "`nVisual Studio 2015 Command Prompt variables set." -ForegroundColor Yellow
+    Write-Host "Visual Studio 2015 Command Prompt variables set." -ForegroundColor Yellow
 }
 
 # TODO use winget instead?
 $ScoopPackages = (
-    "7zip", "delta", "depends", "git", "greenshot", "Hack-NF", "Hack-NF-Mono",
+    "7zip", "delta", "depends", "git", "greenshot", "Hack-NF-Mono",
     "pwsh", "pycharm", "ripgrep", "starship", "sudo", "sysinternals", "tokei", "windows-terminal",
-    "azure-cli", "lf"
+    "azure-cli", "lf", "vscode"
 )
 
 # Get-Process-From-Prefix | Stop-Process -Confirm
@@ -101,11 +93,31 @@ function whois {
     Get-AdUser -Identity $userid -Properties SamAccountName, DisplayName, extensionAttribute1, extensionAttribute2
 }
 
-# Add to the PATH on windows to find it?
-# C:\Program Files\starship\bin\starship.exe
+function ntids {
+    [CmdletBinding()] param($Surname)
+    Get-AdUser -Filter "Surname -like '$Surname*'"
+}
 
+
+
+# this is pretty quick
 Invoke-Expression (& starship init powershell --print-full-init | Out-String)
+
+# anything running condaexe is slow, so paste it here.
+# seems to be slow ... do we need it
+
+# this adds 1s to the startup
 Import-Module posh-git
 
-# Initialise powershell with conda settings
-(& "$Env:CONDA_EXE" "shell.powershell" "hook") | Out-String | Invoke-Expression
+# set this directly, as it's slow otherwise
+$Env:_CE_M = ""
+$Env:_CE_CONDA = ""
+
+# set these from CONDA_EXE?
+$Env:_CONDA_ROOT = "C:\Users\0066tm\AppData\Local\bp-conda"
+$Env:_CONDA_EXE = "C:\Users\0066tm\AppData\Local\bp-conda\Scripts\conda.exe"
+
+$CondaModuleArgs = @{ChangePs1 = $False }
+Import-Module "$Env:_CONDA_ROOT\shell\condabin\Conda.psm1" -ArgumentList $CondaModuleArgs
+Remove-Variable CondaModuleArgs
+
