@@ -34,7 +34,7 @@ function Install-VS2015-Environment {
 $ScoopPackages = (
     "7zip", "delta", "depends", "git", "greenshot", "Hack-NF", "Hack-NF-Mono",
     "pwsh", "pycharm", "ripgrep", "starship", "sudo", "sysinternals", "tokei", "windows-terminal",
-    "azure-cli", "lf"
+    "azure-cli", "lf", "python"
 )
 
 # Get-Process-From-Prefix | Stop-Process -Confirm
@@ -57,6 +57,7 @@ function Install-My-Stuff {
         iwr -useb get.scoop.sh | iex
         scoop bucket add extras
         scoop bucket add nerd-fonts
+        scoop bucket add versions
         scoop install sudo
     }
 
@@ -108,4 +109,4 @@ Invoke-Expression (& starship init powershell --print-full-init | Out-String)
 Import-Module posh-git
 
 # Initialise powershell with conda settings
-(& "$Env:CONDA_EXE" "shell.powershell" "hook") | Out-String | Invoke-Expression
+# (& "$Env:CONDA_EXE" "shell.powershell" "hook") | Out-String | Invoke-Expression

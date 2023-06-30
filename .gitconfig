@@ -16,7 +16,8 @@
 	autosetupremote = true
 
 [credential]
-	helper = store
+	helper = manager
+	useHttpPath = true
 
 [credential "https://github.com"]
     helper = !gh auth git-credential
@@ -69,3 +70,7 @@
 
 	# TODO write a better script to query any open PR first?
 	adopr = "!az repos pr create --open"
+[credential "helperselector"]
+	selected = manager
+[credential "https://dev.azure.com"]
+	username = rob.thatcher
