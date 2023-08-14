@@ -1,12 +1,14 @@
-
 $Env:PY_COLORS = "1"
-# $Env:PYTEST_ADDOPTS = "--tb short --lf --ff --maxfail 1"
 
 $Env:PIP_NO_PYTHON_VERSION_WARNING = "1"
 $Env:PIP_DISABLE_PIP_VERSION_CHECK = "1"
 
 If ($IsWindows) {
     $Env:HOME = "$Env:USERPROFILE"
+}
+
+function pt {
+    & pytest --stepwise --maxfail 1 -s -l -rN --tb=native --log-cli-level=DEBUG --log-level=ERROR -p no:cov --disable-warnings
 }
 
 function Install-VS2015-Environment {
@@ -24,9 +26,9 @@ function Install-VS2015-Environment {
 
 # TODO use winget instead?
 $ScoopPackages = (
-    "7zip", "delta", "depends", "git", "greenshot", "Hack-NF-Mono",
-    "pwsh", "pycharm", "ripgrep", "starship", "sudo", "sysinternals", "tokei", "windows-terminal",
-    "azure-cli", "lf", "vscode"
+    "7zip", "delta", "depends", "Hack-NF-Mono",
+    "pwsh", "pycharm", "ripgrep",  "sudo",  "tokei",
+    "azure-cli", "lf"
 )
 
 # Get-Process-From-Prefix | Stop-Process -Confirm
@@ -73,6 +75,11 @@ function cfg {
     git --git-dir $Env:HOME/.cfg --work-tree=$Env:HOME $Args
 }
 
+function excel {
+    $Excel = "$Env:ProgramFiles\Microsoft Office\Root\Office16\EXCEL.EXE"
+    Start-Process -FilePath $Excel -ArgumentList @Args
+}
+
 function setx {
     [CmdletBinding()]
     param(
@@ -94,30 +101,15 @@ function whois {
 }
 
 function ntids {
-    [CmdletBinding()] param($Surname)
+    [CmdletBinding()] param($userid)
     Get-AdUser -Filter "Surname -like '$Surname*'"
 }
 
-
+function adgroups {
+    [CmdletBinding()] param($userid)
+    Get-AdPrincipalGroupMembership tungm2 | select name
+}
 
 # this is pretty quick
 Invoke-Expression (& starship init powershell --print-full-init | Out-String)
-
-# anything running condaexe is slow, so paste it here.
-# seems to be slow ... do we need it
-
-# this adds 1s to the startup
-Import-Module posh-git
-
-# set this directly, as it's slow otherwise
-$Env:_CE_M = ""
-$Env:_CE_CONDA = ""
-
-# set these from CONDA_EXE?
-$Env:_CONDA_ROOT = "C:\Users\0066tm\AppData\Local\bp-conda"
-$Env:_CONDA_EXE = "C:\Users\0066tm\AppData\Local\bp-conda\Scripts\conda.exe"
-
-$CondaModuleArgs = @{ChangePs1 = $False }
-Import-Module "$Env:_CONDA_ROOT\shell\condabin\Conda.psm1" -ArgumentList $CondaModuleArgs
-Remove-Variable CondaModuleArgs
 
