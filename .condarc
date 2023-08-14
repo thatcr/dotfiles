@@ -12,7 +12,7 @@ envs_dirs:
   - ${LOCALAPPDATA}
   - /hpc/tstapps/tsquant/${HPCPLAT}/envs
   - /hpc/tstapps/tsquant/x86_64/envs
-  
+
 auto_update_conda: false
 aggressive_update_packages: []
 custom_multichannels:

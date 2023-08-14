@@ -1,26 +1,14 @@
-# .profile is used by vscode logins
+#!/bin/sh
 
-# initialize the HPC stuff
-SETUP="/hpc/apps/setup"
-[ -f "$SETUP/profile.bash" ] && . $SETUP/profile.bash
+# NOTE vscode will use /bib/sh on first access so this sets the environment
+#      for it's commands. terminals will launch bashrc etc.
 
-# the HPC conda setup includes lots of extra channels we don't need
-module load git conda sge
-conda activate base
-unset CONDARC
-
-# use london time
+export PATH=~/bin:~/.local/bin:${PATH}
 export TZ=GB
-
-export XDG_CACHE_HOME=/data1/${USER}/.cache
-mkdir --parents $XDG_CACHE_HOME
-
-export STARSHIP_CACHE=$XDG_RUNTIME_DIR
-export PRE_COMMIT_HOME="/data1/${USER}/pre-commit-cache"
-export VSCODE_CLI_DATA_DIR="${HPCDATADIR}/.vscode-cli"
-
 export NTLM_USER_FILE=${HOME}/.ntlm-user-file
 
-# Created by `pipx` on 2022-12-15 10:02:07
-export PATH="$PATH:/home/0066tm/.local/bin"
+# TERM_PROGRAM will be "vscode"
+
+# if we are on HPC install the specific script
+[ -d "/hpc" ] && source ${HOME}/.profile.hpc
 
