@@ -3,7 +3,7 @@
 	helper = store
 
 [http]
-	sslBackend = schannel
+	sslBackend = openssl
 
 [user]
 	name = Rob Thatcher
