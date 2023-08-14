@@ -4,12 +4,20 @@ add_newline = true
 # format = "$status$directory$git_branch$conda$time$username$hostname\n$status$character"
 
 [python]
-disabled = false
+disabled = true
+
+[rlang]
+disabled = true
 
 [git_status]
 disabled = true
 
-
 [status]
 disabled = false
-format="[$symbol $status]($style) "
+format = "[$common_meaning $status]($style) "
+
+
+# sometimes using unicode chars here seems to break vscode rendering?
+# [character]
+# success_symbol = '[>](green)'
+# error_symbol = '[>](red)'

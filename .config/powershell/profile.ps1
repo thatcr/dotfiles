@@ -1,20 +1,14 @@
-
-
-# controls poetry's colours, but breaks nox-poetry
-#$Env:ANSICON = "1"
-
-$Env:PYTHONNOUSERSITE = "1"
-
-$Env:PRE_COMMIT_COLOR = "always"
-
 $Env:PY_COLORS = "1"
-$Env:PYTEST_ADDOPTS = "--tb short"
 
 $Env:PIP_NO_PYTHON_VERSION_WARNING = "1"
 $Env:PIP_DISABLE_PIP_VERSION_CHECK = "1"
 
 If ($IsWindows) {
     $Env:HOME = "$Env:USERPROFILE"
+}
+
+function pt {
+    & pytest --stepwise --maxfail 1 -s -l -rN --tb=native --log-cli-level=DEBUG --log-level=ERROR -p no:cov --disable-warnings
 }
 
 function Install-VS2015-Environment {
@@ -27,13 +21,13 @@ function Install-VS2015-Environment {
         }
     }
     Pop-Location
-    Write-Host "`nVisual Studio 2015 Command Prompt variables set." -ForegroundColor Yellow
+    Write-Host "Visual Studio 2015 Command Prompt variables set." -ForegroundColor Yellow
 }
 
 # TODO use winget instead?
 $ScoopPackages = (
-    "7zip", "delta", "depends", "git", "greenshot", "Hack-NF", "Hack-NF-Mono",
-    "pwsh", "pycharm", "ripgrep", "starship", "sudo", "sysinternals", "tokei", "windows-terminal",
+    "7zip", "delta", "depends", "Hack-NF-Mono",
+    "pwsh", "pycharm", "ripgrep",  "sudo",  "tokei",
     "azure-cli", "lf"
 )
 
@@ -81,6 +75,11 @@ function cfg {
     git --git-dir $Env:HOME/.cfg --work-tree=$Env:HOME $Args
 }
 
+function excel {
+    $Excel = "$Env:ProgramFiles\Microsoft Office\Root\Office16\EXCEL.EXE"
+    Start-Process -FilePath $Excel -ArgumentList @Args
+}
+
 function setx {
     [CmdletBinding()]
     param(
@@ -101,11 +100,16 @@ function whois {
     Get-AdUser -Identity $userid -Properties SamAccountName, DisplayName, extensionAttribute1, extensionAttribute2
 }
 
-# Add to the PATH on windows to find it?
-# C:\Program Files\starship\bin\starship.exe
+function ntids {
+    [CmdletBinding()] param($userid)
+    Get-AdUser -Filter "Surname -like '$Surname*'"
+}
 
+function adgroups {
+    [CmdletBinding()] param($userid)
+    Get-AdPrincipalGroupMembership tungm2 | select name
+}
+
+# this is pretty quick
 Invoke-Expression (& starship init powershell --print-full-init | Out-String)
-Import-Module posh-git
 
-# Initialise powershell with conda settings
-(& "$Env:CONDA_EXE" "shell.powershell" "hook") | Out-String | Invoke-Expression
