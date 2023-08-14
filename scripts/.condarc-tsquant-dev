@@ -1,0 +1,19 @@
+local_repodata_ttl: 86400
+always_update_conda: false
+always_copy: False
+always_softlink: False
+always_yes: True
+notify_outdated_conda: false
+channel_alias: https://dml.bpweb.bp.com/artifactory/api/conda
+channels:
+    - conda-forge
+custom_multichannels:
+    conda-forge:
+        - https://dml.bpweb.bp.com/artifactory/api/conda/ext-conda-forge
+    pyhpc: []
+
+envs_path:
+    - /hpc/tstapps/tsquant/${HPCPLAT}/envs
+
+pkgs_dirs:
+    - /hpc/tstapps/tsquant/${HPCPLAT}/pkgs

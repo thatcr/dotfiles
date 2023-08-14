@@ -1,0 +1,41 @@
+#!/bin/bash
+set -e
+
+# TODO make this more generic and move to bp-hpc?
+
+# command="/hpcdata/0066tm/scripts/ssh-tsquant-dev",no-pty,no-port-forwarding ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC+yQR1OAX5vzPU1oKfpkPNYETqH8WFhStYx7DC+GA3ZU+MKMqSkxukLoYK3te5dSVEuTjv7H4CKsQLJJgUm1x91v7sX6OIFdIdECUO/c8se+k6rZLjpaN3evghbVuZyU0FTauitRAdn61RkBdR/sj8HpueVFsmTLnxWqXIIEyyrX+ydwd7kEYW0eWx4FQKnquweZYwzLKhKRdFgFfBxXOT+Lf/sv64/0XB5ilNj6OY0dGmFe77/1ldsCa5r1tP6c3u1nl/HCNqtuFvRB+6Xy/W5NIYQWjViYynJbt7dHf5FhA44EWnuR74YKcrtxNTRnPc6N6d6xBTL/I/JWqxB+DIUltY7KO41KiDIjoNfgKn+W0PKlXjqYAKJIf26UOJ1LXnD7Cp/+kHiWU+JihtwI9w7jhiTZS3PVELHwYoqAVDrSkT7N7d3UDHuQXW0Lx+EoVw51BhprD9Yb6Eo7yYAN2SJz0gwPgep+30OnNMJp6Rl1/ha3PTxkEJpj4I5+ASbcM= bp1\0066tm@ZNEEINEP21IE545
+
+# parse the SSH ARGC invoked into an array
+ARGC=($SSH_ORIGINAL_COMMAND)
+
+# find a script name alongside this one and resolve the symlink
+# back to the source file
+ARGC[0]=$(realpath $(dirname "${BASH_SOURCE[0]}")/$(basename ${ARGC[0]}))
+
+# don't use 'module load conda' to install conda as it adds extra env vars we don't want
+export PATH=/hpc/apps/pyhpc/dist/conda/x86_64/miniforge3-4.9.2-7/condabin:${PATH}
+
+# TODO unset all CONDA_ PIP_*? Or just isolate
+unset CONDA_ENVS_PATH
+unset CONDA_PKGS_DIRS
+unset PIP_NO_CACHE_DIR
+unset PYTHONPATH
+
+# configure conda for tsquant installs
+export CONDARC=$(dirname "${BASH_SOURCE[0]}")/.condarc-tsquant-dev
+export CONDA_VERBOSE=1
+export CONDA_QUIET=1
+export PIP_VERBOSE=1
+
+echo "ARGC: ${ARGC[@]}"
+
+# display conda configuration to check
+conda info
+
+# TODO stderr gets translated into pipeline error logs, so use stdout for now
+exec ${ARGC[@]} 2>&1
+
+
+
+
+

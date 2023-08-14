@@ -16,12 +16,12 @@
 	default = current
 	autosetupremote = true
 
-
 [credential]
 	helper = store
 
-[credential "https://github.com"]
-    helper = !gh auth git-credential
+# TODO how to keep this aligned if we don't have gh?
+# [credential "https://github.com"]
+#     helper = !gh auth git-credential
 
 # TODO how to configure a default upstream on first push?
 #      have workon make it and push it?
@@ -33,8 +33,9 @@
 	editor = code --wait
 	pager = less -FX
 
-# [interactive]
-# 	diffFilter = delta --color-only
+[pager]
+	branch = ""
+
 
 [merge]
 	conflictstyle = diff3
@@ -47,11 +48,16 @@
 	side-by-side = true
 
 
+# TODO script setting the desription to the pull request URL so we can go there easily?
+
 # TODO work workin - need to configure the branch to have .rebase = origin/master, . .branch = $1
 #      can this be a default?
 #      How does command line git manage this, but not vscode?
 [alias]
 	rbom = "!git fetch origin master && git rebase origin/master --strategy-option theirs --empty=drop"
+	rbc = "rebase --continue"
+	mr = "!git fetch origin master && git checkout -B master origin/master"
+	wn = "diff --name-only origin/master"
 	sync = "pull --rebase=true --strategy-option=theirs origin master"
 	changed = "diff --name-status origin/master"
 	rbc = "rebase --continue"
@@ -68,11 +74,9 @@
 	caf = "commit --all --no-verify -m"
 	fu = "commit --fixup"
 	pollard = "!git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", $1); print $1}'); do git branch -v -D $branch; done"
-
 	# TODO write a better script to query any open PR first?
-	adopr = "!az repos pr create --open"
-	# TODO write a better script to query any open PR first?
-	adopr = "!az repos pr create --open"
+	adopr = "!az repos pr create --open"	
+	
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
@@ -80,5 +84,3 @@
 	smudge = git-lfs smudge -- %f
 [http]
 	sslBackend = schannel
-[gui]
-	recentrepo = C:/workspace/pyistqa

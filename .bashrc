@@ -1,18 +1,21 @@
-# exec pwsh
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/workspace/mambaforge/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/workspace/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/workspace/mambaforge/etc/profile.d/conda.sh"
-    else
-        export PATH="/workspace/mambaforge/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+#!/bin/bash
+#------------------------------------------------------------------------------     
+# BP HPC .bashrc file 
+# => Do not delete, modify, or molest.
+# => All user mods should go in $HOME/.userbashrc
+#------------------------------------------------------------------------------     
+# => This is where our setup files live
+#     
+SETUP="/hpc/apps/setup"
+#
+#------------------------------------------------------------------------------     
+#     
+[ -f "$SETUP/profile.bash" ] && . $SETUP/profile.bash
+#
+#------------------------------------------------------------------------------
+#
+[ -f "$HOME/.userbashrc" ] && . $HOME/.userbashrc
+#
 
-eval "$(starship init bash)"
-
+# Created by `pipx` on 2022-12-15 10:02:07
+export PATH="$PATH:/home/0066tm/.local/bin"
