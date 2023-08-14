@@ -18,8 +18,8 @@
 [credential]
 	helper = store
 
-[credential "https://github.com"]
-    helper = !gh auth git-credential
+# [credential "https://github.com"]
+#     helper = !gh auth git-credential
 
 # TODO how to configure a default upstream on first push?
 #      have workon make it and push it?
