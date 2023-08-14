@@ -1,14 +1,17 @@
-# don't touch anaconda.com
-default_channels:
-  - https://conda.anaconda.org/conda-forge
+channel_alias: https://dml.bpweb.bp.com/artifactory/api/conda
 
-# default from conda-forge is 1200 seconds
-local_repodata_ttl: 1
+# how to force this to override, and not include the underlying channels
+channels:
+  - https://dml.bpweb.bp.com/artifactory/api/conda/ext-conda-forge
+default_channels: #!final
+  - https://dml.bpweb.bp.com/artifactory/api/conda/ext-conda-forge
 
-# let the shell do this instead
-changeps1: False
 
-# stack so we can see base tools
-auto_stack: 1
-
-ssl_verify: /etc/ssl/certs/ca-bundle.crt
+envs_dirs:
+  - /hpc/tstapps/tsquant/${HPCPLAT}/envs
+  - /hpc/tstapps/tsquant/x86_64/envs
+auto_update_conda: false
+aggressive_update_packages: []
+custom_multichannels:
+  conda-forge:
+    - https://dml.bpweb.bp.com/artifactory/api/conda/ext-conda-forge

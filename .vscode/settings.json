@@ -2,7 +2,6 @@
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.enabled": true,
-  "python.pythonPath": ".pyenv/versions/3.9.1/bin/python",
   "git.ignoreLimitWarning": true,
   "workbench.colorCustomizations": {
     "activityBar.activeBackground": "#fbed80",

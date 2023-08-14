@@ -1,27 +1,26 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
+# .profile is used by vscode logins
 
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
-#umask 022
+# initialize the HPC stuff
+SETUP="/hpc/apps/setup"
+[ -f "$SETUP/profile.bash" ] && . $SETUP/profile.bash
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
+# the HPC conda setup includes lots of extra channels we don't need
+module load git conda sge
+conda activate base
+unset CONDARC
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+# use london time
+export TZ=GB
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
+export XDG_CACHE_HOME=/data1/${USER}/.cache
+mkdir --parents $XDG_CACHE_HOME
+
+export STARSHIP_CACHE=$XDG_RUNTIME_DIR
+export PRE_COMMIT_HOME="/data1/${USER}/pre-commit-cache"
+export VSCODE_CLI_DATA_DIR="${HPCDATADIR}/.vscode-cli"
+
+export NTLM_USER_FILE=${HOME}/.ntlm-user-file
+
+# Created by `pipx` on 2022-12-15 10:02:07
+export PATH="$PATH:/home/0066tm/.local/bin"
+

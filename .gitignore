@@ -1,3 +1,6 @@
+*.log
+bin/
+.bin/
 .cache/
 .conda/
 .kube/
@@ -17,9 +20,14 @@
 .osh-*
 .motd_shown
 .k5login
+.krb5cache
+.history
+.python_history-*
 .sudo_as_admin_successful
-.vscode-server/
 .ipynb_checkpoints/
+.pyistqa-msal-cache
+perl5/
+dask-worker-space/
 
 .*/
 !.config/
@@ -58,8 +66,8 @@ __pycache__/
 scratch/
 miniforge3/
 scoop/
-.vscode-server/
-.cfg/
+.vscode-server/**
+.vscode-server
 
 # Windows Stuff
 NTUSER*
