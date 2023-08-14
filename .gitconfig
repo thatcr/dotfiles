@@ -1,86 +1,14 @@
-[user]
-	name = Rob Thatcher
-	email = rob.thatcher@bp.com
 
-[pager]
-	diff = less -FX
-	branch = ""
-
-[pull]
-	rebase = true
-
-[fetch]
-	prune = true
-
-[push]
-	default = current
-	autosetupremote = true
+[include]
+	path = ~/.config/gitconfig
 
 [credential]
 	helper = store
 
-# TODO how to keep this aligned if we don't have gh?
-# [credential "https://github.com"]
-#     helper = !gh auth git-credential
-
-# TODO how to configure a default upstream on first push?
-#      have workon make it and push it?
-[branch]
-	autoSetupMerge = simple
-	autoSetupRebase = always
-
-[core]
-	editor = code --wait
-	pager = less -FX
-
-[pager]
-	branch = ""
-
-
-[merge]
-	conflictstyle = diff3
-	defaultToUpstream = true
-
-[diff]
-	colorMoved = default
-
-[delta]
-	side-by-side = true
-
-
-# TODO script setting the desription to the pull request URL so we can go there easily?
-
-# TODO work workin - need to configure the branch to have .rebase = origin/master, . .branch = $1
-#      can this be a default?
-#      How does command line git manage this, but not vscode?
-[alias]
-	rbom = "!git fetch origin master && git rebase origin/master --strategy-option theirs --empty=drop"
-	rbc = "rebase --continue"
-	mr = "!git fetch origin master && git checkout -B master origin/master"
-	wn = "diff --name-only origin/master"
-	sync = "pull --rebase=true --strategy-option=theirs origin master"
-	changed = "diff --name-status origin/master"
-	rbc = "rebase --continue"
-	reset-master = "!git fetch origin master && git checkout -B master origin/master"
-	bv = "!git fetch --prune; git branch -vvv --sort=committerdate"
-	bd = "branch --delete --force"
-	workon = "!(git fetch origin master && (git checkout -b $1 --track origin/master || git checkout $1))"
-	dom = "!git fetch origin master; git diff origin/master"
-	dunk = "!git diff origin/master | dunk"
-	rhh = "reset --hard HEAD"
-	rn = "branch -m"
-	c = "!git commit -m '$1'; echo"
-	ca = "commit --all"
-	caf = "commit --all --no-verify -m"
-	fu = "commit --fixup"
-	pollard = "!git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", $1); print $1}'); do git branch -v -D $branch; done"
-	# TODO write a better script to query any open PR first?
-	adopr = "!az repos pr create --open"	
-	
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
 [http]
 	sslBackend = schannel
+
+[user]
+	name = Rob Thatcher
+	email = rob.thatcher@bp.com
+
