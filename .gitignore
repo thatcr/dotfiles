@@ -1,6 +1,7 @@
 .gitconfig
 *.log
 bin/
+scripts/
 .bin/
 .cache/
 .conda/
