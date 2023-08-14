@@ -1,6 +1,3 @@
-[user]
-	name = Rob Thatcher
-	email = rob.thatcher@bp.com
 
 [pager]
 	diff = less -FX
@@ -16,17 +13,13 @@
 	default = current
 	autosetupremote = true
 
-[credential]
-	helper = store
 
 # TODO how to keep this aligned if we don't have gh?
 # [credential "https://github.com"]
 #     helper = !gh auth git-credential
 
-# TODO how to configure a default upstream on first push?
-#      have workon make it and push it?
 [branch]
-	autoSetupMerge = simple
+	autoSetupMerge = always
 	autoSetupRebase = always
 
 [core]
@@ -35,7 +28,6 @@
 
 [pager]
 	branch = ""
-
 
 [merge]
 	conflictstyle = diff3
@@ -75,12 +67,10 @@
 	fu = "commit --fixup"
 	pollard = "!git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", $1); print $1}'); do git branch -v -D $branch; done"
 	# TODO write a better script to query any open PR first?
-	adopr = "!az repos pr create --open"	
-	
+	adopr = "!az repos pr create --open"
+
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[http]
-	sslBackend = schannel
