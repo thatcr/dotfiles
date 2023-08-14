@@ -2,8 +2,6 @@
 	name = Rob Thatcher
 	email = rob.thatcher@bp.com
 
-[core]
-
 [pager]
 	diff = less -FX
 	branch = ""
@@ -15,8 +13,9 @@
 	prune = true
 
 [push]
-	default = simple
+	default = current
 	autosetupremote = true
+
 
 [credential]
 	helper = store
@@ -27,7 +26,7 @@
 # TODO how to configure a default upstream on first push?
 #      have workon make it and push it?
 [branch]
-	autoSetupMerge = true
+	autoSetupMerge = simple
 	autoSetupRebase = always
 
 [core]
@@ -52,23 +51,26 @@
 #      can this be a default?
 #      How does command line git manage this, but not vscode?
 [alias]
-	rbom = "!git fetch origin master && git rebase origin/master --strategy-option theirs"
+	rbom = "!git fetch origin master && git rebase origin/master --strategy-option theirs --empty=drop"
+	sync = "pull --rebase=true --strategy-option=theirs origin master"
+	changed = "diff --name-status origin/master"
 	rbc = "rebase --continue"
-	mr = "!git fetch origin master && git checkout -B master origin/master"
-	wn = "diff --name-only origin/master"
-	br = "branch --sort=committerdate"
+	reset-master = "!git fetch origin master && git checkout -B master origin/master"
+	bv = "!git fetch --prune; git branch -vvv --sort=committerdate"
 	bd = "branch --delete --force"
-	wo = "!git fetch origin master && ((git branch $1 origin/master && git branch $1 --set-upstream-to origin/$1) || (git checkout $1 && git rebase origin/master --strategy-option theirs)) && echo Now working on "
-	br = "branch -m"
-	bc = "branch -c"
+	workon = "!(git fetch origin master && (git checkout -b $1 --track origin/master || git checkout $1))"
 	dom = "!git fetch origin master; git diff origin/master"
 	dunk = "!git diff origin/master | dunk"
 	rhh = "reset --hard HEAD"
-	rn = "branch --move"
-	cq = "commit --all --no-verify -m"
-	fu = "commit --all --no-verify --amend"
-	pr = "!git fetch origin pull/$1/merge:pull/$1 && git checkout pull/$1; az repos pr show --id $1 -o json --query title; echo Checked out pull request"
+	rn = "branch -m"
+	c = "!git commit -m '$1'; echo"
+	ca = "commit --all"
+	caf = "commit --all --no-verify -m"
+	fu = "commit --fixup"
+	pollard = "!git fetch -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", $1); print $1}'); do git branch -v -D $branch; done"
 
+	# TODO write a better script to query any open PR first?
+	adopr = "!az repos pr create --open"
 	# TODO write a better script to query any open PR first?
 	adopr = "!az repos pr create --open"
 [filter "lfs"]

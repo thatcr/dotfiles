@@ -20,6 +20,7 @@
 .sudo_as_admin_successful
 .vscode-server/
 .ipynb_checkpoints/
+.bp365-msal-cache
 
 .*/
 !.config/
