@@ -18,6 +18,7 @@
 [credential]
 	helper = store
 
+# TODO how to keep this aligned if we don't have gh?
 # [credential "https://github.com"]
 #     helper = !gh auth git-credential
 
