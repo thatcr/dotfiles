@@ -1,7 +1,4 @@
 
-[include]
-	path = ~/.config/gitconfig
-
 [credential]
 	helper = store
 
