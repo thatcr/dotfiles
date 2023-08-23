@@ -6,7 +6,6 @@ $Env:PIP_DISABLE_PIP_VERSION_CHECK = "1"
 If ($IsWindows) {
     $Env:HOME = "$Env:USERPROFILE"
 }
-
 function pt {
     & pytest --stepwise --maxfail 1 -s -l -rN --tb=native --log-cli-level=DEBUG --log-level=ERROR -p no:cov --disable-warnings
 }
@@ -113,3 +112,7 @@ function adgroups {
 # this is pretty quick
 Invoke-Expression (& starship init powershell --print-full-init | Out-String)
 
+# if Env:CONDA is set then setup the pwsh hooks
+If (Test-Path -Path "$Env:CONDA" -PathType Container) {
+    (& "$Env:CONDA\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | Invoke-Expression
+}
