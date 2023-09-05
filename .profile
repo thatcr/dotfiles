@@ -6,6 +6,7 @@
 export PATH=~/bin:~/.local/bin:${PATH}
 export TZ=GB
 export NTLM_USER_FILE=${HOME}/.ntlm-user-file
+export PYTRACK_DISABLE=1
 
 # TERM_PROGRAM will be "vscode"
 

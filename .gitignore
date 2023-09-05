@@ -28,6 +28,8 @@ scripts/
 .sudo_as_admin_successful
 .ipynb_checkpoints/
 .pyistqa-msal-cache
+.config/dask/
+nohup.out
 perl5/
 dask-worker-space/
 .bp365-msal-cache
