@@ -11,7 +11,7 @@
 
 [push]
 	default = current
-	autosetupremote = true
+	autoSetupRemote = true
 
 
 # TODO how to keep this aligned if we don't have gh?
@@ -19,7 +19,7 @@
 #     helper = !gh auth git-credential
 
 [branch]
-	autoSetupMerge = always
+	autoSetupRebase = always
 	autoSetupRebase = always
 
 [core]
