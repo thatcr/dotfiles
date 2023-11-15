@@ -35,8 +35,8 @@ dask-worker-space/
 .bp365-msal-cache
 
 .*/
-!.config/
-!.config/**/
+# !.config/
+# !.config/**/
 
 !.github/**
 
