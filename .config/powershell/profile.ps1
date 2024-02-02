@@ -106,7 +106,7 @@ function ntids {
 
 function adgroups {
     [CmdletBinding()] param($userid)
-    Get-AdPrincipalGroupMembership tungm2 | select name
+    Get-AdPrincipalGroupMembership $userid | select name
 }
 
 # this is pretty quick
